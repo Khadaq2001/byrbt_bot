@@ -261,7 +261,7 @@ class TorrentBot(ContextDecorator):
                     continue
                 ok_infos.append(torrent_info)
         else:
-            # 正常种子选择标准是免费种子并且(下载数/上传数)>0.6
+            # 正常种子选择标准是免费种子并且(下载数/上传数)>0.4
             for torrent_info in torrent_infos:
                 if torrent_info['seed_id'] in self.old_torrent:
                     continue
@@ -271,7 +271,7 @@ class TorrentBot(ContextDecorator):
                 if torrent_info['seeding'] <= 0 or torrent_info['downloading'] < 0:
                     continue
                 if torrent_info['seeding'] != 0 and float(torrent_info['downloading']) / float(
-                        torrent_info['seeding']) < 0.6:
+                        torrent_info['seeding']) < 0.4:
                     continue
                 ok_infos.append(torrent_info)
         return ok_infos
